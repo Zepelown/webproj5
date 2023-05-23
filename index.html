@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>노인돌봄센터 및 공사현황</title>
+    <style></style>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d1eb3c280ec1fbfe07219609de84c6d"
+    ></script>
+  </head>
+
+  <body>
+    <div id="map" style="width: 500px; height: 400px"></div>
+    <script>
+      var container = document.getElementById("map");
+      var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3,
+      };
+
+      var map = new kakao.maps.Map(container, options);
+    </script>
+  </body>
+</html>

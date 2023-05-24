@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            animation-name: animation;
+            animation-duration: 1.3s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes animation {
+            0% {
+                transform: translate(0, 250px);
+            }
+
+            20% {
+                transform: translate(1000px, 250px);
+            }
+
+            40% {
+                transform: translate(250px, 500px)
+            }
+
+            60% {
+                transform: translate(500px, 0)
+            }
+
+            80% {
+                transform: translate(750px, 500px)
+            }
+
+            100% {
+                transform: translate(0, 250px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

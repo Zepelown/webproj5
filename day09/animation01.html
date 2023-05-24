@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="jquery.innerfade.js"></script>
+    <script>
+        $(function(){
+            $("#inner-fade").innerfade({
+                animationtype: "slide",
+                speed: 1500,
+                timeout: 1000,
+                containerheight: "1000px"
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="inner-fade">
+        <p style="background-color:red">one</p>
+        <p style="background-color:black">one</p>
+        <p style="background-color:blue">one</p>
+        <p style="background-color:white">one</p>
+        <p style="background-color:green">one</p>
+    </div>
+
+</body>
+</html>

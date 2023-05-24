@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* #4A90E2 : 돋움의 동그라미 색(파랑), #50E3C2: 돋움의 ㄷ색(에메랄드)*/
+
+    /* 헤더의 검색창 부분*/
+    #head_search {
+      width: 500px;
+      height: 45px;
+      margin-left: 20px;
+      margin-right: 10px;
+      border-color: #ffee00;
+    }
+
+    /* 헤더의 검색버튼 부분 */
+    #head_search_btn {
+      width: 200px;
+      height: 45px;
+      background-color: #ffdab9;
+    }
+
+    /* 검색창 로고 */
+    #logo {
+      float: left;
+      width: 75px;
+      border: 10px;
+    }
+
+    /* 검색창 + 로고 + 검색버튼 중앙정렬 */
+    #form {
+      display: flex;
+      align-items: center;
+    }
+
+    /* 드롭다운바 시작입니다. */
+    li {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .menu {
+      width: 800px;
+      padding: 0px;
+      margin: 0px;
+      margin-top: 10px;
+      border-color: black;
+      overflow: visible;
+    }
+
+    .menu>li {
+      width: 25%;
+      /*20*5=100%*/
+      float: left;
+      text-align: center;
+      line-height: 40px;
+      font-size: 15px;
+      color: black;
+      border: black;
+      border-color: black;
+      background-color: #ffdab9;
+    }
+
+    .menu a {
+      color: #fff;
+    }
+
+    .submenu>li {
+      line-height: 50px;
+      background-color: #ffe4b5;
+    }
+
+    .submenu {
+      padding: 0px;
+      height: 0;
+      /*ul의 높이를 안보이게 처리*/
+      overflow: hidden;
+    }
+
+    .menu>li:hover {
+      background-color: #ffd700;
+      transition-duration: 0.5s;
+    }
+
+    .menu>li:hover .submenu {
+      height: auto;
+      /* (내가 바꿈)자동으로 조절 */
+      /* 원래는 한개에 50 */
+      transition-duration: 1s;
+    }
+
+    /* (내가 만든거) 올리면 색 바뀜, 커서 클릭모양 */
+    .menu>li>.submenu>li:hover {
+      cursor: pointer;
+      background-color: #ffd700;
+      transition-duration: 0.5s;
+    }
+
+    /* 드롭다운 바 끝입니다. */
+  </style>
+</head>
+<script>
+</script>
+
+<body>
+  <!-- 홈페이지 제일 최상단 부분 -->
+  <header id="head">
+    <!-- 1번 div -->
+    <div>
+
+      <div>
+        <form action="https://www.google.com/search" method="get" id="form" target="_blank">
+          <a href="">
+            <img src="map_marker.png" id="logo" alt="제목부분입니다.">
+          </a>
+          <input type="search" id="head_search" placeholder="장소, 도로 검색">
+          <input type="submit" id="head_search_btn" value="검색">
+
+
+          <script>
+            // 헤더의 검색기능 --> 구글로 검색해줌
+            function go_search(event) {
+              event.preventDefault();
+              var input = document.getElementById("head_search").value;
+              var encodedInput = encodeURIComponent(input);
+              var searchUrl = "https://www.google.com/search?q=" + encodedInput;
+              window.open(searchUrl, "_blank");
+            }
+
+            var searchForm = document.getElementById("form");
+            searchForm.addEventListener("submit", go_search);
+          </script>
+
+        </form>
+
+        <!-- 메뉴바 선택 -->
+        <script>
+          // 구 데이터 셋
+          var data = [
+            ["종로구", "용산구", "중구", "강남구"],
+            ["남구", "수영구", "해운대구", "부산진구", "강서구"]
+          ];
+
+          /* 서울, 부산 중 어느것을 선택했는지 확인 */
+          function sido_change_busan() {
+            var gu = document.getElementById("gu");
+            gu.removeEventListener("click", selectGu);
+            gu.addEventListener("click", selectGu);
+
+            // 선택한 지역에 대한 지역구 추가
+            var guData = data[1];
+            reset_gu();
+            deleteOption(gu);
+
+
+            for (var i = 0; i < guData.length; i++) {
+              var option = document.createElement("li");
+              var optionText = document.createTextNode(guData[i]);
+              option.appendChild(optionText);
+              option.setAttribute("style", "color: black;") // 추가된 구도 하얀 글씨
+              gu.appendChild(option);
+            }
+
+            // 선택되면 지역이름 바꿔주기
+            var selectedSido = document.getElementById("selected_sido");
+            selectedSido.textContent = "부산광역시";
+          }
+
+          function sido_change_seoul() {
+            var gu = document.getElementById("gu");
+            gu.removeEventListener("click", selectGu);
+            gu.addEventListener("click", selectGu);
+
+            var guData = data[0];
+            reset_gu();
+            deleteOption(gu);
+
+
+            for (var i = 0; i < guData.length; i++) {
+              var option = document.createElement("li");
+              var optionText = document.createTextNode(guData[i]);
+              option.appendChild(optionText);
+              option.setAttribute("style", "color: black;")
+              gu.appendChild(option);
+            }
+
+            var selectedSido = document.getElementById("selected_sido");
+            selectedSido.textContent = "서울특별시";
+          }
+
+          /* 다른 지역으로 변경시 옵션을 비워주는 함수 */
+          function deleteOption(gu) {
+            while (gu.firstChild) {
+              gu.removeChild(gu.firstChild);
+            }
+          }
+
+          /* 새롭게 추가된 구에도 클릭 */
+          function selectGu(event) {
+            var target = event.target;
+
+            if (target.tagName === "LI") {
+              // 선택한 구에 대한 처리 코드
+              selected_gu.textContent = target.textContent; // 선택한 구 이름 바꿔주기
+
+              // 선택 구로 지도 중심 이동
+              if (target.textContent == "수영구") {
+                latitude = 35.1454038;
+                longitude = 129.112318;
+                make_map(latitude, longitude);
+              }
+
+              if (target.textContent == "남구") {
+                latitude = 35.13499;
+                longitude = 129.10390;
+                make_map(latitude, longitude);
+              }
+
+              if (target.textContent == "부산진구") {
+                latitude = 35.1633676;
+                longitude = 129.042932;
+                make_map(latitude, longitude);
+              }
+
+              if (target.textContent == "해운대구") {
+                latitude = 35.163052;
+                longitude = 129.163612;
+                make_map(latitude, longitude);
+              }
+
+              if (target.textContent == "강서구") {
+                latitude = 35.156618;
+                longitude = 128.898418;
+                make_map(latitude, longitude);
+              }
+            }
+          }
+
+          /* 메뉴 버튼 클릭시 원래상태로 돌려주는 함수 */
+          function reset_sido() {
+            var selectedSido = document.getElementById("selected_sido");
+            selectedSido.textContent = "대도시 선택";
+
+            reset_gu();
+            deleteOption(gu);
+
+            var defaultOption = document.createElement("li");
+            var defaultOptionText = document.createTextNode("대도시를 선택하세요.");
+            defaultOption.appendChild(defaultOptionText);
+            defaultOption.setAttribute("style", "color: black;")
+            gu.appendChild(defaultOption);
+          }
+
+          function reset_gu() {
+            var selectedGu = document.getElementById("selected_gu");
+            selectedGu.textContent = "군/구 선택";
+
+            var gu = document.getElementById("gu");
+            // deleteOption(gu);
+            var defaultOption = document.createElement("li");
+            // var defaultOptionText = document.createTextNode("대도시를 선택하세요.");
+            // defaultOption.appendChild(defaultOptionText);
+            defaultOption.setAttribute("style", "color: black;")
+            gu.appendChild(defaultOption);
+          }
+
+          function make_map(latitude, longitude) {
+            var mapOption = {
+              center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+              level: 7, // 지도의 확대 레벨
+              mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+            };
+            // 지도를 생성한다
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+            // 지도에 마커를 생성하고 표시한다
+            var marker = new kakao.maps.Marker({
+              position: new kakao.maps.LatLng(latitude, longitude), // 마커의 좌표
+              map: map // 마커를 표시할 지도 객체
+            });
+          }
+        </script>
+        <div>
+          <ul class="menu">
+            <li>
+              <a href="#"><span id="selected_sido" onclick="reset_sido()">대도시 선택</span></a>
+              <ul class="submenu">
+                <li id="a0" value="a0" onclick="sido_change_busan()">부산광역시</li>
+                <li id="a1" value="a1" onclick="sido_change_seoul()">서울특별시</li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span id="selected_gu" onclick="reset_gu()">군/구 선택</span></a>
+              <ul class="submenu" id="gu">
+                <li><a href="#" id="b0">대도시를 선택하세요.</a></li>
+
+              </ul>
+            </li>
+
+            <li>
+              <a href="#">복지</a>
+              <ul class="submenu">
+                <li><a href="#">submenu01</a></li>
+                <li><a href="#">submenu02</a></li>
+                <li><a href="#">submenu03</a></li>
+                <li><a href="#">submenu04</a></li>
+                <li><a href="#">submenu05</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">기타자료</a>
+              <ul class="submenu">
+                <li><a href="#">submenu01</a></li>
+                <li><a href="#">submenu02</a></li>
+                <li><a href="#">submenu03</a></li>
+                <li><a href="#">submenu04</a></li>
+                <li><a href="#">submenu05</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="map" style="width:800px;height:600px;"></div>
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=237ecdf7e1393eaf3b2fd0ac6bb7c252"></script>
+  <script>
+    var mapContainer = document.getElementById('map') // 지도를 표시할 div
+    var latitude = 35.13499; // 변수에 저장된 위도 값
+    var longitude = 129.10390; // 변수에 저장된 경도 값 
+
+    var mapOption = {
+      center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+      level: 7, // 지도의 확대 레벨
+      mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+    };
+    // 지도를 생성한다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    // 지도에 마커를 생성하고 표시한다
+    var marker = new kakao.maps.Marker({
+      position: new kakao.maps.LatLng(35.13499, 129.10390), // 마커의 좌표
+      map: map // 마커를 표시할 지도 객체
+    });
+  </script>
+
+
+</body>
+
+</html>

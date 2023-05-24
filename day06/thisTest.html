@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .red-text {
+            color: red;
+        }
+
+        .black-text {
+            color: black;
+        }
+    </style>
+    <script>
+        function test(element) {
+            if (element.classList.contains("red-text")) {
+                element.classList.remove("red-text");
+                element.classList.add("black-text");
+            } else {
+                element.classList.remove("black-text");
+                element.classList.add("red-text");
+            }
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <button onclick="test(this)">aaa</button>
+    <button onclick="test(this)">bbb</button>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        var data = [
+            ["종로구", "용산구", "중구", "강남구"],
+            ["수영구", "동래구", "해운대구", "부산진구"]
+        ];
+
+        var hobbyData = [
+            ["AI", "빅데이터", "블록체인"],
+            ["자유여행", "패키지여행"],
+            ["인도음식", "태국음식", "중국음식", "일본음식"]
+        ];
+
+        var html = "<tr>";
+        var count = 0;
+
+        window.onload = function () {
+            var sido    = document.getElementById("sido");
+            var gu      = document.getElementById("gu");
+
+            sido.onchange = function () {
+                // 1. 서울, 부산 중 어느것을 선택했는지 확인
+
+                deleteOption();
+
+                if(sido.value > 0) {
+                    var guData = data[sido.value - 1];
+
+                    for( var i = 0; i < guData.length; i++ ) {
+                        var option      = document.createElement("option");
+                        var optionText  = document.createTextNode(guData[i]);
+
+                        option.appendChild(optionText);
+                        gu.appendChild(option);
+                    }
+                }
+            }
+
+            var hobbyList = document.getElementsByClassName("hobby");
+
+            for( var i = 0; i < hobbyList.length; i++ ) {
+                
+
+                hobbyList[i].addEventListener("change", function (event) {
+                    
+                    // table에 있는 데이터를 모두 지우기
+                    // 아래 selectItem()에서도 innerHTML을 사용하기에, 내용을 지우는 로직은 필요없어짐.
+                    // deleteTd();
+
+                    // 선택한 취미의 데이터를 가져오기
+                    selectItem();
+                });
+            }
+        }
+
+        function selectItem() {
+            var hobbyList = document.getElementsByClassName("hobby");
+
+            for( var i = 0; i < hobbyList.length; i++ ) {
+                if( hobbyList[i].checked == true ) {
+                    var hobbyValue = hobbyList[i].value;
+
+                    switch (hobbyValue) {
+                        case "it":
+                            addTd(0);
+                            break;
+                        case "traval":
+                            addTd(1);
+                            break;
+                        case "food":
+                            addTd(2);
+                            break;
+                    }
+                }
+            }
+
+            html += "</tr>";
+            var list = document.getElementById("list"); // table
+
+            list.innerHTML = html;
+
+            // 데이터 초기화.
+            html = "<tr>";
+            count = 0;
+        }
+
+        function addTd(index) {
+            for(var j = 0; j < hobbyData[index].length; j++) {
+                if(count % 3 == 0) {
+                    html += "</tr><tr>";
+                }
+                
+                html += "<td>" + hobbyData[index][j] + "</td>";
+                ++count;
+            }
+        }
+
+        // function deleteTd() {
+        //     var list = document.getElementById("list"); // table
+        //     list.innerHTML = "";
+        // }
+
+        function deleteOption() {           
+            while(true) {
+                if( gu.length == 1 ) {
+                    break;
+
+                } else {
+                    gu.removeChild(gu[gu.length - 1]);
+                }
+            }
+        }
+
+        function displayChange() {
+
+            // 1. 사용자, 관리자 영역 관리
+            var radioList = document.getElementsByClassName("member");
+
+            var user = document.getElementById("user");
+            var admin = document.getElementById("admin");
+
+            for( var i = 0; i < radioList.length; i++ ) {
+                if( radioList[i].checked == true ) {
+
+                    if( radioList[i].value == "user" ) {
+                        user.style.display = "";
+                        admin.style.display = "none";
+                    
+                    } else {
+                        user.style.display = "none";
+                        admin.style.display = "";
+                    }
+                } 
+            }
+        }
+        function check(){
+            var name = document.getElementById("nameInput").value;
+            if(name.length<2 || name.length>4){
+                alert("이름을 2~4자리로만 입력해주세요");
+                nameInput.focus();
+                return 0;
+            }
+
+            var sido    = document.getElementById("sido");
+            var gu      = document.getElementById("gu");
+            var address = document.getElementById("address");
+            if(sido.value === "0"){
+                alert("시를 선택해주세요.");
+                sido.focus();
+            } else if(gu.value === "0"){
+                alert("구를 선택해주세요.");
+                gu.focus();
+            } else if(address.value.trim()==""){
+                alert("상세주소를 입력해주세요.");
+                address.focus();
+            } else{
+                alert("입력을 잘하셨습니다.")
+            }
+        }
+    </script>
+    <body>
+        사용자 : <input type="radio" class="member" name="member" value="user" onchange="displayChange()"/>
+        관리자 : <input type="radio" class="member" name="member" value="admin" onchange="displayChange()" />
+        <hr/>
+
+        <div id="user">
+            <table border="1">
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" id= "nameInput" name="name" /></td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        <select id="sido">
+                            <option value="0">선택하세요.</option>
+                            <option value="1">서울</option>
+                            <option value="2">부산</option>
+                        </select>
+                        <select id="gu">
+                            <option value="0">선택하세요.</option>
+                        </select>
+                        <input type="text" id="address"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>관심분야</th>
+                    <td>
+                        <input type="checkbox" class="hobby" name="hobby" value="it" /> IT
+                        <input type="checkbox" class="hobby" name="hobby" value="traval" /> 여행
+                        <input type="checkbox" class="hobby" name="hobby" value="food" /> 음식
+
+                        <table border="1" id="list">
+                            <tr>
+                                <td>AI</td>
+                                <td>빅데이터</td>
+                                <td>블록체인</td>
+                            </tr>
+                            <tr>
+                                <td>배낭여행</td>
+                                <td>오지여행</td>
+                                <td>패키지여행</td>
+                            </tr>
+                            <tr>
+                                <td>인도음식</td>
+                                <td>아프리카음식</td>
+                                <td>태국음식</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <button onclick="check()">정보저장</button>
+
+        <div id="admin" style="display:none">
+            구상 중입니다.
+        </div>
+    </body>
+</html>

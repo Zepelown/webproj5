@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: relative;
+        }
+    </style>
+    <script>
+        var interval = null;
+
+        function createInterval() {
+            return setInterval(function() {
+                $("div").animate({left: "300px"}, 1000).animate({left: "0px"}, 1000);
+            }, 2000);
+        }
+
+        function stopAnimation() {
+            clearInterval(interval);
+            $("div").stop(true);
+        }
+
+        $(function() {
+            $("#stop").click(function() {
+                stopAnimation();
+                setTimeout(function() {
+                    interval = createInterval();
+                }, 2000);
+            });
+
+            $("#move").click(function() {
+                stopAnimation();
+                interval = createInterval();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div></div>
+
+    <button id="move">move</button>
+    <button id="stop">stop</button>
+</body>
+</html>

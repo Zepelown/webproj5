@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function(){
+            $("tr:even").css("background-color","yellow");
+            $("tr:odd").css("background-color","skyblue");
+
+            $("tr:nth-child(1)").css("background-color","red");
+            // $("th:even").css("background-color","yellowgreen");
+            $("th:contains('작')").css("color","white");
+        })
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>작성자</th>
+            <th>조회수</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>어린왕자</td>
+            <td>1970.01.01</td>
+            <td>생텍쥐베리</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>패트와메트</td>
+            <td>1993.12.24</td>
+            <td>작자미상</td>
+            <td>32455</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>홍길동</td>
+            <td>미상</td>
+            <td>허균</td>
+            <td>452</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>아낌없이주는나무</td>
+            <td>어릴때</td>
+            <td>모름</td>
+            <td>20</td>
+        </tr>
+    </table>
+</body>
+</html>

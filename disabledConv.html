@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>장애인 편의시설 보유 업소</title>
+</head>
+
+<body>
+    <div id="map" style="width:100%;height:600px;"></div>
+
+    <script type="text/javascript"
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=48bf9c9621d5f297a462adb46cba2f1b&libraries=services,clusterer"></script>
+
+    <script>
+        const url = 'https://apis.data.go.kr/6260000/BusanFcltsDsgstInfoService/getFcltsDsgstInfo?serviceKey=UE%2BeS7fd%2BJ6hfdwYzoLAyI01f%2BSlk8KcJxBe1jW5ozgmWIkaURAsJ3uu0N4esvtfjuCmYeZAMwv5vgT0NWyNqA%3D%3D&numOfRows=687&pageNo=1&resultType=json'
+
+        var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new kakao.maps.LatLng(35.13417, 129.11397),
+                level: 9
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        fetch(url)
+            .then(res => res.json())
+            .then(resJson => {
+                var markers = [];
+                // 초록색 마커로 표시
+                var markerImage_green = new kakao.maps.MarkerImage(
+                    'https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png',
+                    new kakao.maps.Size(24, 34),
+                    {
+                        offset: new kakao.maps.Point(13, 34),
+                    }
+                );
+
+                for (var i = 0; i < 687; i++) {
+                    const contents = resJson.getFcltsDsgstInfo.body.items.item[i].contents;
+                    const startIndex = contents.indexOf("2.");
+                    const endIndex = contents.indexOf("<", startIndex);
+                    let address = contents.substring(startIndex, endIndex).trim();
+                    address = address.replace(/2\.\s*주\s*소 : ?/i, "").trim();
+
+                    const store_name = resJson.getFcltsDsgstInfo.body.items.item[i].subject;
+
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    geocoder.addressSearch(address, function (result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: coords,
+                                image: markerImage_green // 초록색 마커로 표시
+                            });
+
+                            markers.push(marker);
+
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">' + store_name + '</div>'
+                            });
+
+                            // Add 'mouseover' event listener to the marker
+                            kakao.maps.event.addListener(marker, 'mouseover', function () {
+                                infowindow.open(map, marker);
+                            });
+
+                            // Add 'mouseout' event listener to the marker
+                            kakao.maps.event.addListener(marker, 'mouseout', function () {
+                                infowindow.close();
+                            });
+                        }
+
+                        if (markers.length === 500) {
+                            var clusterer = new kakao.maps.MarkerClusterer({
+                                map: map,
+                                markers: markers,
+                                gridSize: 50,
+                                averageCenter: true,
+                                minLevel: 4
+                            });
+                        }
+                    });
+                }
+            });
+    </script>
+</body>
+
+</html>

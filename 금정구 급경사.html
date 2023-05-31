@@ -45,7 +45,7 @@
                 var markers = [];
                 for (var i = 0; i < resJson.data.length; i++) {
                     const contents = resJson.data;
-                    var address = contents[i].주소;
+                    var address = '부산시 ' + contents[i].주소;
 
                     console.log(address);
                     var geocoder = new kakao.maps.services.Geocoder();

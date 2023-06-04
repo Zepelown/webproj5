@@ -1,0 +1,257 @@
+#top_service{
+    position: absolute;
+    z-index: 100;
+    top: -9px;
+    display: flex;
+    width: 100%;
+    height: 57px;
+}
+#top_service_left{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 70%;
+    padding: 20px;
+    
+}
+#top_service_right{
+    display: flex;
+    align-items: center;
+    background-color: black;
+    width: 30%;
+    padding: 20px;
+
+}
+
+.top_service_left_serach_box{
+    display: flex;
+    width: 378px;
+    height: 36px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 7px;
+
+}
+.top_service_left_button{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    font-weight: 600;
+    width: 130px;
+    background-color: #258fff;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+
+}
+.top_service_left_input_box{
+    width: 200px;
+
+}
+
+.top_service_left_input{
+    width: 100%;
+    height: 33px;
+    border: none;
+    font-size: 13px;
+}
+.top_service_left_input:focus{
+    outline: none;
+}
+.top_service_left_input::-webkit-input-placeholder{
+    padding: 10px;
+    font-weight: 600;
+}
+.top_service_left_button_kakao{
+    font-size: 15px;
+}
+.top_service_left_input_icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:2px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.top_service_left_destnation_box{
+    overflow: hidden;
+}
+.top_service_left_destnation{
+    background-color: white;
+    width: 50px;
+    height: 36px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top_service_left_around{
+    background-color: white;
+    width: 50px;
+    height: 36px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top_service_left_location{
+    background-color: white;
+    width: 250px;
+    height: 36px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.top_service_left_location_name{
+    opacity: 0.8;
+}
+
+.top_service_left_destnation_option_box{
+    width: 50px;
+    height: 72px;
+    transform: translateY(-800px);
+    transition: 0.5s;
+}
+
+.option_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    background-color: #fff;
+}
+.border_bottom{
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+
+}
+.border_bottom_radius{
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.top_service_left_around_option_box{
+    background-color: aquamarine;
+    width: 150px;
+    height: 100px;
+    border-radius: 5px;
+    transform: translateY(-800px);
+    transition: 0.5s;
+}
+.top_service_left_around{
+    transition: 0.7s;
+}
+
+.top_service_left_around_box{
+    overflow: hidden;
+}
+
+.transition{
+    transition: 0.5s;
+}
+
+.find_way_button_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    position: absolute;
+    bottom: 43px;
+    right: 55px;
+    background-color: #258fff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-weight: 600;
+    color: white;
+}
+.marker_delete{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    position: absolute;
+    bottom: 43px;
+    right: 55px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-weight: 600;
+    color: white;
+    bottom: 130px;
+    background-color: darkred;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.top_service_left_button_menu{
+    cursor: pointer;
+
+}
+
+
+.kakaomap_menu{
+    height: 100vh;
+    width: 320px;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.background_box{
+    position: absolute;
+    z-index: 2000;
+    transform: translateX(-2000px);
+    transition: 0.5s;
+}
+.kakaomap_menu_header{
+    display: flex;
+    justify-content: space-between;
+
+}
+.kakaomap_menu_header_webproj5{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.kakaomap_menu_header-exitbutton{
+    cursor: pointer;
+}
+
+.top_service_left_input_option{
+    display: none;
+    background-color:white;
+    width: 243px;
+    height: 80px;
+}
+.top_servce_left_input_option_history{
+    opacity: 0.5;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.top_service_left_input_option_history_box{
+    height: 80%;
+    font-size: 15px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+.location_name{
+    cursor: pointer;
+} */
+
+
+.start_find_way{
+    
+    display: none;
+}

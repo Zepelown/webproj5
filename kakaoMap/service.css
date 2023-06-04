@@ -172,6 +172,25 @@
     font-weight: 600;
     color: white;
 }
+.marker_delete{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    position: absolute;
+    bottom: 43px;
+    right: 55px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-weight: 600;
+    color: white;
+    bottom: 130px;
+    background-color: darkred;
+    opacity: 0;
+    transition: 0.5s;
+}
 
 .top_service_left_button_menu{
     cursor: pointer;
@@ -226,7 +245,13 @@
     justify-content: center;
     align-items: center;
 }
-
+/* 
 .location_name{
     cursor: pointer;
+} */
+
+
+.start_find_way{
+    
+    display: none;
 }

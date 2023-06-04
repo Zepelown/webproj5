@@ -12,6 +12,28 @@ const $kakaomapMenuHeaderExitButton = document.querySelector('.kakaomap_menu_hea
 const $backgroundBox = document.querySelector('.background_box');
 const $topServiceLeftInputOption = document.querySelector('.top_service_left_input_option');
 const $topServiceLeftInput = document.querySelector('.top_service_left_input');
+const $findWay = document.querySelector('.find_way');
+const $findWayButtonBox = document.querySelector('.find_way_button_box');
+const $startFindWay = document.querySelector('.start_find_way');
+const $markerDelete = document.querySelector('.marker_delete');
+
+
+$findWay.addEventListener('click', () => {
+    $findWay.style.display = 'none';
+    $startFindWay.style.display = 'block';
+    $findWayButtonBox.style.backgroundColor = 'red'
+    $markerDelete.style.opacity = '1'
+})
+
+$markerDelete.addEventListener('click', () => {
+    $findWay.style.display = 'block';
+    $startFindWay.style.display = 'none';
+    $findWayButtonBox.style.backgroundColor = '#258fff';
+    $markerDelete.style.opacity = '0'
+
+})
+
+
 $topServiceLeftDestnationBox.addEventListener('mouseover', () => {
     $topServiceLeftDestnationOptionBox.style.transform = 'translateY(0)'
 })

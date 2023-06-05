@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tmap</title>
+    <link rel="stylesheet" href="css/t_map.css" />
+    <script
+      src="https://kit.fontawesome.com/fccc6f24f6.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=kzrC8emrIM6HcgQTxeCyT4ifJysfZXgx9XChHVMR"></script>
+  </head>
+
+  <body onload="initTmap();">
+    <div class="map_nav_box">
+      <div class="map_nav_header">
+        <i class="fa-solid fa-helmet-safety"></i>
+        SafeGuard
+      </div>
+      <div class="result_box">
+        <p id="result"></p>
+      </div>
+      <div class="map_nav_content">
+        <div class="map_nav_content_danger_area">위험지역</div>
+      </div>
+    </div>
+    <div id="map_wrap" class="map_wrap3">
+      <div id="map_div"></div>
+    </div>
+    <div class="map_act_btn_wrap clear_box"></div>
+    <br />
+
+    <script src="js/t_map.js"></script>
+  </body>
+</html>

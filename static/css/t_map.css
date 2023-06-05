@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+}
+
+.result_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 15px;
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.map_nav_content {
+  padding: 10px;
+  height: 100px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+#result {
+  margin: 0;
+}
+
+.map_nav_box {
+  color: white;
+  font-weight: 600;
+  font-size: 22px;
+  background-color: white;
+  width: 300px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.map_nav_header {
+  background-color: #258fff;
+  height: 100px;
+  padding: 30px;
+}
+
+.map_nav_content_danger_area {
+  color: red;
+  font-size: 15px;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>안챔</title>
+  <link rel="stylesheet" href="css/search.css" />
+  <link rel="stylesheet" href="css/kakao.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=DynaPuff:wght@600&family=Fasthand&family=Noto+Sans+KR:wght@500&family=Open+Sans:wght@500&family=Ubuntu:ital@1&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script src="https://kit.fontawesome.com/fccc6f24f6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="map_wrap">
+    <div id="map" style="width: 100%; height: 100vh; position: relative; overflow: hidden"></div>
+    <div id="top_service">
+      <div class="search_box">
+        <!-- <div class="search_button">
+                    검색하기
+                </div> -->
+        <div id="menu_wrap" class="bg_white">
+          <div class="option">
+            <div>
+              <form onsubmit="searchPlaces(); return false;" class="search_form">
+                <div class="search_ancham">안챔</div>
+                <input type="text" value="" id="keyword" size="15" class="search_input" placeholder="장소,주소" />
+                <button type="submit" class="search_input_button">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+                <button id="removeMarkerBtn">
+                  <i class="fa-solid fa-xmark fa-lg"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+        </div>
+      </div>
+      <div class="nav_button_box">
+        <div onclick="redMarkerClick()" class="nav_button_danger_area">
+          <i class="fa-solid fa-hammer fa-lg"></i>
+          위험지역
+        </div>
+        <div onclick="disableMarkerClick()" class="nav_button_facilities">
+          <i class="fa-brands fa-pagelines fa-lg"></i>
+          편의시설
+        </div>
+        <div onclick="elderyMarkerClick()" class="nav_button_oldman">
+          <i class="fa-solid fa-person-cane fa-lg"></i>
+          노인
+        </div>
+      </div>
+    </div>
+
+    <div class="find_way_button_box">
+      <div>
+        <i class="fa-solid fa-arrow-turn-up fa-2x"></i>
+      </div>
+      <div class="find_way_button" style="margin-top: 10px">
+        <div onclick="showMarkers()" style="cursor: pointer" class="find_way">
+          길찾기
+        </div>
+        <div onclick="redirectToTMap()" style="cursor: pointer" class="start_find_way">
+          길찾기 시작
+        </div>
+      </div>
+    </div>
+
+    <div class="marker_delete">
+      <div>
+        <i class="fa-solid fa-xmark fa-2x"></i>
+      </div>
+      <div class="find_way_button" style="margin-top: 10px">
+        <div onclick="hideMarkers()" style="cursor: pointer">마커 삭제</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript"
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=48bf9c9621d5f297a462adb46cba2f1b&libraries=services,clusterer"></script>
+  <script src="js/search.js"></script>
+  <script src="js/kakaoUi.js"></script>
+  <script src="js/dragMarker.js"></script>
+  <script src="js/slope.js"></script>
+</body>
+
+</html>

@@ -88,7 +88,6 @@
   height: 80px;
   border-radius: 50%;
   font-weight: 600;
-  color: white;
   bottom: -87px;
   background-color: darkred;
   opacity: 0;
@@ -102,4 +101,74 @@
 .search_input::-webkit-input-placeholder {
   font-weight: 600;
   padding: 10px;
+}
+
+
+.nav_button_box{
+    position: absolute;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 70px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-radius: 10px;
+    font-weight: 600;
+
+}
+.nav_button_danger_area,
+.nav_button_facilities{
+  border-right: 1px solid rgba(0,0,0,0.9);
+}
+
+.nav_button_box div{
+  width: 120px;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav_button_box div i{
+  margin-right: 5px;
+}
+
+.nav_button_danger_area{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.nav_button_oldman{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+@media(max-width:850px) {
+  .nav_button_box{
+    top: 631px;
+    left: 85px;
+  }
+  .nav_button_box div{
+    width: 100%;
+    margin-bottom: 17px
+  }
+ 
+  .nav_button_facilities,
+  .nav_button_oldman,
+  .nav_button_danger_area{
+    border-radius:0;
+    border: none;
+  }
+  .find_way_button_box{
+    bottom: -93px;
+  }
+  .marker_delete{
+    bottom: 10px;
+  }
+  .search_box{
+    width: 90%;
+  }
+  .search_input{
+    width: 100%;
+  }
 }

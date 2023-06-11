@@ -540,3 +540,93 @@ YeonjeSlope();
 YeongdoSlope();
 elderlyCare();
 disabledComfort();
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setRedMarkers(map) {
+  for (var i = 0; i < redMarkers.length; i++) {
+    redMarkers[i].setMap(map);
+  }
+  redClusterer.setMap(map);
+  redClusterer.redraw();
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showRedMarkers() {
+  setRedMarkers(map);
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideRedMarkers() {
+  setRedMarkers(null);
+}
+
+var redMarkerShowHide = 0;
+function redMarkerClick() {
+  if (redMarkerShowHide == 0) {
+    hideRedMarkers();
+    redMarkerShowHide = 1;
+  } else if (redMarkerShowHide == 1) {
+    showRedMarkers();
+    redMarkerShowHide = 0;
+  }
+}
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setElderyMarkers(map) {
+  for (var i = 0; i < elderyMarkers.length; i++) {
+    elderyMarkers[i].setMap(map);
+  }
+  elderyClusterer.setMap(map);
+  elderyClusterer.redraw();
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showElderyMarkers() {
+  setElderyMarkers(map);
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideElderyMarkers() {
+  setElderyMarkers(null);
+}
+
+var elderyShowHide = 0;
+function elderyMarkerClick() {
+  if (elderyShowHide == 0) {
+    hideElderyMarkers();
+    elderyShowHide = 1;
+  } else if (elderyShowHide == 1) {
+    showElderyMarkers();
+    elderyShowHide = 0;
+  }
+}
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setDisableMarkers(map) {
+  for (var i = 0; i < disableMarkers.length; i++) {
+    disableMarkers[i].setMap(map);
+  }
+  disableClusterer.setMap(map);
+  disableClusterer.redraw();
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showDisableMarkers() {
+  setDisableMarkers(map);
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideDisableMarkers() {
+  setDisableMarkers(null);
+}
+
+var disableShowHide = 0;
+function disableMarkerClick() {
+  if (disableShowHide == 0) {
+    hideDisableMarkers();
+    disableShowHide = 1;
+  } else if (disableShowHide == 1) {
+    showDisableMarkers();
+    disableShowHide = 0;
+  }
+}

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
+    <title>안챔</title>
     <link rel="stylesheet" href="css/search.css" />
     <link rel="stylesheet" href="css/kakao.css" />
     <link
@@ -57,6 +57,20 @@
             <div id="pagination"></div>
           </div>
         </div>
+        <div class="nav_button_box">
+          <div onclick="redMarkerClick()" class="nav_button_danger_area">
+            <i class="fa-solid fa-hammer fa-lg"></i>
+            위험지역
+          </div>
+          <div onclick="disableMarkerClick()" class="nav_button_facilities">
+            <i class="fa-brands fa-pagelines fa-lg"></i>
+            편의시설
+          </div>
+          <div onclick="elderyMarkerClick()" class="nav_button_oldman">
+            <i class="fa-solid fa-person-cane fa-lg"></i>
+            노인
+          </div>
+        </div>
       </div>
 
       <div class="find_way_button_box">
@@ -94,7 +108,6 @@
     <script src="js/search.js"></script>
     <script src="js/kakaoUi.js"></script>
     <script src="js/dragMarker.js"></script>
-    <!-- <script src="js/kakaoMap.js"></script> -->
     <script src="js/slope.js"></script>
   </body>
 </html>

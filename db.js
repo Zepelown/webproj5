@@ -16,8 +16,6 @@ const config = require("./config");
 
 const db = firebase.initializeApp(config.firebaseConfig);
 
-// const auth = firebase.auth;
-
 module.exports = {
   db,
 };

@@ -237,6 +237,8 @@ function makeMarker(name, lat, log) {
     "mouseout",
     mouseOutListener(infoWindow)
   );
+
+  clusterer.addMarker();
 }
 
 const loadData = function () {

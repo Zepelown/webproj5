@@ -12,6 +12,53 @@ const $navButtonBox = document.querySelector(".nav_button_box");
 const $navButtonDangerBox = document.querySelector(".nav_button_danger_area");
 const $navButtonFacilities = document.querySelector(".nav_button_facilities");
 const $navBUttonOldman = document.querySelector(".nav_button_oldman");
+const $sideMenuBox = document.querySelector(".side_menu_box");
+const $searchAnchamMenuButton = document.querySelector(
+  ".search_ancham_menu_button"
+);
+const $sideMenuExitButton = document.querySelector(".side_menu_exit_button");
+const $sideMenuLogin = document.querySelector(".side_menu_login");
+const $loginBigBox = document.querySelector(".login_bigbox");
+const $loginExit = document.querySelector(".login_exit");
+const $goJoinButton = document.querySelector(".gojoin_button");
+const $userJoinbox = document.querySelector(".user_join_box");
+const $joinExitButton = document.querySelector(".join_exit");
+
+$joinExitButton.addEventListener("click", () => {
+  $userJoinbox.style.transform = "translate(-3000px)";
+});
+
+$goJoinButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  $loginBigBox.style.display = "none";
+  $userJoinbox.style.transform = "translateX(0)";
+});
+
+$loginExit.addEventListener("click", () => {
+  $loginBigBox.style.display = "none";
+});
+
+$sideMenuLogin.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(-300px)";
+
+  $loginBigBox.style.display = "flex";
+});
+
+$sideMenuLogin.addEventListener("mouseover", () => {
+  $sideMenuLogin.style.backgroundColor = "rgba(0,0,0,0.8)";
+});
+
+$sideMenuLogin.addEventListener("mouseout", () => {
+  $sideMenuLogin.style.backgroundColor = "rgba(0,0,0,0.3)";
+});
+
+$sideMenuExitButton.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(-300px)";
+});
+
+$searchAnchamMenuButton.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(0)";
+});
 
 $navButtonDangerBox.addEventListener("mouseover", () => {
   $navButtonDangerBox.style.backgroundColor = "rgba(0,0,0,0.4)";

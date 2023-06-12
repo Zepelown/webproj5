@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>안챔</title>
+    <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <link rel="stylesheet" href="css/search.css" />
     <link rel="stylesheet" href="css/kakao.css" />
     <link
@@ -18,6 +18,66 @@
   </head>
 
   <body>
+    <div class="user_join_box">
+      <div class="join_box">
+        <div class="join_exit">
+          <i class="fa-solid fa-xmark fa-lg"></i>
+        </div>
+
+        <div class="join_header">
+          <div>회원가입</div>
+        </div>
+
+        <form action="" class="join_form">
+          <input type="text" placeholder="userName" />
+          <input type="text" placeholder="id" />
+          <input type="password" placeholder="password" />
+          <button class="join_button">회원가입</button>
+        </form>
+      </div>
+    </div>
+    <div class="login_bigbox">
+      <div class="login_box">
+        <div class="login_exit">
+          <i class="fa-solid fa-xmark fa-lg"></i>
+        </div>
+
+        <div class="login_header">
+          <i
+            class="fa-regular fa-hand-point-up fa-lg"
+            style="margin-right: 10px"
+          ></i>
+          safety champion
+        </div>
+
+        <form action="" class="login_form">
+          <input type="text" placeholder="id" />
+          <input
+            type="password"
+            placeholder="password"
+            style="margin-top: 10px"
+          />
+          <button type="submit" class="login_button login_button">
+            로그인
+          </button>
+          <button class="login_button gojoin_button">회원가입</button>
+        </form>
+      </div>
+    </div>
+    <div class="side_menu_box">
+      <div class="side_menu_headaer">
+        <div class="side_menu_ancham">
+          <div style="margin-right: 10px">
+            <i class="fa-regular fa-hand-point-up fa-lg"></i>
+          </div>
+          <div>안전 챔피언</div>
+        </div>
+        <div><i class="fa-solid fa-xmark fa-lg side_menu_exit_button"></i></div>
+      </div>
+      <div class="side_menu_login_box">
+        <div class="side_menu_login">로그인</div>
+      </div>
+    </div>
     <div class="map_wrap">
       <div
         id="map"
@@ -35,7 +95,15 @@
                   onsubmit="searchPlaces(); return false;"
                   class="search_form"
                 >
-                  <div class="search_ancham">안챔</div>
+                  <div class="search_ancham">
+                    <div>
+                      <i
+                        class="fa-solid fa-bars fa-lg search_ancham_menu_button"
+                        style="margin-right: 10px"
+                      ></i>
+                    </div>
+                    <div>안챔</div>
+                  </div>
                   <input
                     type="text"
                     value=""
@@ -58,15 +126,15 @@
           </div>
         </div>
         <div class="nav_button_box">
-          <div onclick="redMarkerClick()" class="nav_button_danger_area">
+          <div class="nav_button_danger_area">
             <i class="fa-solid fa-hammer fa-lg"></i>
             위험지역
           </div>
-          <div onclick="disableMarkerClick()" class="nav_button_facilities">
+          <div class="nav_button_facilities">
             <i class="fa-brands fa-pagelines fa-lg"></i>
             편의시설
           </div>
-          <div onclick="elderyMarkerClick()" class="nav_button_oldman">
+          <div class="nav_button_oldman">
             <i class="fa-solid fa-person-cane fa-lg"></i>
             노인
           </div>
@@ -108,6 +176,5 @@
     <script src="js/search.js"></script>
     <script src="js/kakaoUi.js"></script>
     <script src="js/dragMarker.js"></script>
-    <script src="js/slope.js"></script>
   </body>
 </html>

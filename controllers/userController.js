@@ -1,6 +1,6 @@
 "use strict";
 
-const firebase = require("../db");
+const firebase = require("../firebaseAdmin");
 const User = require("../models/user");
 const firestore = firebase.db.firestore();
 
@@ -92,13 +92,14 @@ const signIn = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  firebase.auth
-    .signInWithEmailAndPassword(req.body, req.body.passwd)
-    .then(function (firebaseUser) {
+  firebase.app
+    .auth()
+    .signInWithEmailAndPassword(req.body.email, req.body.password)
+    .then((firebaseUser) => {
       console.log("로그인 완료!");
     })
-    .catch(function (err) {
-      console.log("로그인 실패");
+    .catch((err) => {
+      console.log("실패!");
     });
 };
 

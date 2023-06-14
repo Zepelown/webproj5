@@ -18,6 +18,55 @@
   </head>
 
   <body>
+    <div class="user_marker_box">
+      <div class="user_marker_header">
+        <i
+          class="fa-regular fa-hand-point-up fa-lg"
+          style="margin-right: 10px"
+        ></i>
+        safety champion
+      </div>
+      <form action="">
+        <div style="margin-top: 10px">
+          <div>장소 이름</div>
+          <input
+            type="text"
+            placeholder="이름"
+            class="user_marker_input marker_name"
+          />
+        </div>
+        <div style="margin-top: 10px">
+          <div>종류</div>
+          <input type="radio" name="drone" value="위험 지역" />
+          <label for="huey">위험 지역</label>
+          <input type="radio" name="drone" value="편의 시설" />
+          <label for="huey">편의 시설</label>
+        </div>
+        <div style="margin-top: 10px">
+          <div>설명</div>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="5"
+            class="user_marker_input marker_description"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="user_marker_button marker_button_registration"
+        >
+          등록
+        </button>
+        <button
+          type="submit"
+          class="user_marker_button marker_button_cancellation"
+        >
+          취소
+        </button>
+      </form>
+    </div>
+
     <div class="user_join_box">
       <div class="join_box">
         <div class="join_exit">
@@ -61,6 +110,7 @@
             로그인
           </button>
           <button class="login_button gojoin_button">회원가입</button>
+          <input class="GoogleBtn" type="button" value="Google Login" />
         </form>
       </div>
     </div>
@@ -171,6 +221,11 @@
       </div>
     </div>
 
+    <div class="user_marker">
+      <div><i class="fa-solid fa-location-dot fa-lg"></i></div>
+      <div class="create_marker">마커 생성</div>
+    </div>
+
     <script
       type="text/javascript"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=48bf9c9621d5f297a462adb46cba2f1b&libraries=services,clusterer"
@@ -180,5 +235,6 @@
     <script src="js/dragMarker.js"></script>
     <script src="js/slope.js"></script>
     <script src="js/userMarker.js"></script>
+    <script src="js/firebase.js" type="module"></script>
   </body>
 </html>

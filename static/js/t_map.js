@@ -1563,3 +1563,4 @@ function addSquareMap() {
     }
   });
 }
+

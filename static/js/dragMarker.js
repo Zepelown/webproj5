@@ -207,6 +207,6 @@ function redirectToTMap() {
     "&cenlng=" +
     encodeURIComponent(cenlng);
 
-  // 새 창 또는 탭에서 URL 열기
+  // 새 탭에서 URL 열기
   window.open(url, "_blank");
 }

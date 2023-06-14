@@ -181,31 +181,35 @@ const centerLatitude = urlParams.get("cenlat");
 const centerLongitude = urlParams.get("cenlng");
 
 function initTmap() {
-
   var start_lat = startLatitude;
   var start_lng = startLongitude;
   var end_lat = arriveLatitude;
   var end_lng = arriveLongitude;
-  
+
+  // 1. 자도 띄우고 출발점과 도착점 마커찍기
   mapAndMarker(start_lat, start_lng, end_lat, end_lng);
 
+  // 2. 지도에 20*20 격자판 띄우기
   addSquareMap();
 
+  // 3. 보행자 경로를 격자판에서 좌표상에서 움직이는것으로 표시하고, 경로 그리기
   var routeIndexArray = findRoute(start_lat, start_lng, end_lat, end_lng);
   drawLine(drawInfoArr);
 
+  // 4. 위험한 구역을 좌표로 받아오고, 그 구역 도로명 가져오기
   var [dangerIndexArray, roadName] = findDanger(redMarker);
   var roadNameIndex;
 
+  console.log(routeIndexArray);
+
+  // 5. 경로 상에서 위험구역을 만나면 우회할 경유지 계산하기
   for (var i = 0; i < dangerIndexArray.length; i++) {
     var detourArray = calculateDetour(routeIndexArray, dangerIndexArray[i]);
 
-    if (detourArray === undefined) {
+    if (detourArray === undefined)
       continue;
-    }
-    else if (detourArray.length === 0) {
+    else if (detourArray.length === 0)
       continue;
-    }
     else {
       roadNameIndex = i;
       break;
@@ -214,13 +218,15 @@ function initTmap() {
 
   document.getElementById('danger_area_road').textContent = roadName[roadNameIndex];
 
+  // 6. 우회한 최종 경로 그리기
   finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray);
 
+  // 7. 격자판 제거하기
   squaremap.destroy();
 }
 
 function mapAndMarker(start_lat, start_lng, end_lat, end_lng) {
-  // 1. 지도 띄우기
+  // 지도 띄우기
   map = new Tmapv2.Map("map_div", {
     center: new Tmapv2.LatLng(centerLatitude, centerLongitude),
     width: "100%",
@@ -230,8 +236,7 @@ function mapAndMarker(start_lat, start_lng, end_lat, end_lng) {
     scrollwheel: true,
   });
 
-
-  // 2. 시작, 도착 심볼찍기
+  // 시작, 도착 심볼찍기
   // 시작
   marker_s = new Tmapv2.Marker({
     position: new Tmapv2.LatLng(start_lat, start_lng),
@@ -1229,7 +1234,6 @@ function findDanger(redMarker) {
 }
 
 function findRoute(start_lat, start_lng, end_lat, end_lng) {
-  // 3. 경로탐색 API 사용요청
   var headers = {};
   headers["appKey"] = "kzrC8emrIM6HcgQTxeCyT4ifJysfZXgx9XChHVMR";
 
@@ -1253,15 +1257,10 @@ function findRoute(start_lat, start_lng, end_lat, end_lng) {
       var resultData = response.features;
 
       //결과 출력
-      var tDistance =
-        "총 거리 : " +
-        (resultData[0].properties.totalDistance / 1000).toFixed(1) +
-        "km,";
-      var tTime =
-        " 총 시간 : " +
-        (resultData[0].properties.totalTime / 60).toFixed(0) +
-        "분";
-
+      var tDistance = "총 거리 : " +
+        (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km,";
+      var tTime = " 총 시간 : " +
+        (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
       $("#result").text(tDistance + tTime);
 
       //기존 그려진 라인 & 마커가 있다면 초기화
@@ -1278,7 +1277,6 @@ function findRoute(start_lat, start_lng, end_lat, end_lng) {
         //for문 [S]
         var geometry = resultData[i].geometry;
         var properties = resultData[i].properties;
-        var polyline_;
 
         if (geometry.type == "LineString") {
           for (var j in geometry.coordinates) {
@@ -1304,24 +1302,10 @@ function findRoute(start_lat, start_lng, end_lat, end_lng) {
           var pType = "";
           var size;
 
-          if (properties.pointType == "S") {
-            //출발지 마커
-            markerImg =
-              "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
-            pType = "S";
-            size = new Tmapv2.Size(24, 38);
-          } else if (properties.pointType == "E") {
-            //도착지 마커
-            markerImg =
-              "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
-            pType = "E";
-            size = new Tmapv2.Size(24, 38);
-          } else {
-            //각 포인트 마커
-            markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-            pType = "P";
-            size = new Tmapv2.Size(8, 8);
-          }
+          //각 포인트 마커
+          markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+          pType = "P";
+          size = new Tmapv2.Size(8, 8);
 
           // 경로들의 결과값들을 포인트 객체로 변환
           var latlon = new Tmapv2.Point(
@@ -1459,24 +1443,10 @@ function finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray) {
           var pType = "";
           var size;
 
-          if (properties.pointType == "S") {
-            //출발지 마커
-            markerImg =
-              "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
-            pType = "S";
-            size = new Tmapv2.Size(24, 38);
-          } else if (properties.pointType == "E") {
-            //도착지 마커
-            markerImg =
-              "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
-            pType = "E";
-            size = new Tmapv2.Size(24, 38);
-          } else {
-            //각 포인트 마커
-            markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
-            pType = "P";
-            size = new Tmapv2.Size(8, 8);
-          }
+          //각 포인트 마커
+          markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+          pType = "P";
+          size = new Tmapv2.Size(8, 8);
 
           // 경로들의 결과값들을 포인트 객체로 변환
           var latlon = new Tmapv2.Point(

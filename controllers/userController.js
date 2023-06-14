@@ -59,8 +59,53 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+const signIn = async (req, res, next) => {
+  const newUser = {
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword,
+    handle: req.body.handle,
+    phone: req.body.phone,
+    name: req.body.name,
+    photoURL: req.body.photo,
+  };
+
+  firebase.auth
+    .createUser({
+      email: newUser.email,
+      emailVerified: false,
+      phoneNumber: newUser.phone,
+      password: newUser.password,
+      displayName: newUser.name,
+      photoURL: newUser.photoURL,
+      disabled: false,
+    })
+    .then((data) => {
+      return res
+        .status(201)
+        .json({ message: `user ${data.uid} signed up successfully` });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+};
+
+const login = async (req, res, next) => {
+  firebase.auth
+    .signInWithEmailAndPassword(req.body, req.body.passwd)
+    .then(function (firebaseUser) {
+      console.log("로그인 완료!");
+    })
+    .catch(function (err) {
+      console.log("로그인 실패");
+    });
+};
+
 module.exports = {
   addUser,
   getAllUser,
   updateUser,
+  login,
+  signIn,
 };

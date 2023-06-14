@@ -181,6 +181,45 @@ const centerLatitude = urlParams.get("cenlat");
 const centerLongitude = urlParams.get("cenlng");
 
 function initTmap() {
+
+  var start_lat = startLatitude;
+  var start_lng = startLongitude;
+  var end_lat = arriveLatitude;
+  var end_lng = arriveLongitude;
+  
+  mapAndMarker(start_lat, start_lng, end_lat, end_lng);
+
+  addSquareMap();
+
+  var routeIndexArray = findRoute(start_lat, start_lng, end_lat, end_lng);
+  drawLine(drawInfoArr);
+
+  var [dangerIndexArray, roadName] = findDanger(redMarker);
+  var roadNameIndex;
+
+  for (var i = 0; i < dangerIndexArray.length; i++) {
+    var detourArray = calculateDetour(routeIndexArray, dangerIndexArray[i]);
+
+    if (detourArray === undefined) {
+      continue;
+    }
+    else if (detourArray.length === 0) {
+      continue;
+    }
+    else {
+      roadNameIndex = i;
+      break;
+    }
+  }
+
+  document.getElementById('danger_area_road').textContent = roadName[roadNameIndex];
+
+  finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray);
+
+  squaremap.destroy();
+}
+
+function mapAndMarker(start_lat, start_lng, end_lat, end_lng) {
   // 1. 지도 띄우기
   map = new Tmapv2.Map("map_div", {
     center: new Tmapv2.LatLng(centerLatitude, centerLongitude),
@@ -191,10 +230,7 @@ function initTmap() {
     scrollwheel: true,
   });
 
-  var start_lat = startLatitude;
-  var start_lng = startLongitude;
-  var end_lat = arriveLatitude;
-  var end_lng = arriveLongitude;
+
   // 2. 시작, 도착 심볼찍기
   // 시작
   marker_s = new Tmapv2.Marker({
@@ -211,44 +247,6 @@ function initTmap() {
     iconSize: new Tmapv2.Size(24, 38),
     map: map,
   });
-
-  addSquareMap();
-
-  var routeIndexArray = findRoute(start_lat, start_lng, end_lat, end_lng);
-  drawLine(drawInfoArr);
-  console.log(routeIndexArray);
-
-  //redMarker = [
-  //  [35.132541, 129.094577],
-  //  [35.130218, 129.098874]
-  //];
-
-  var [dangerIndexArray, roadName] = findDanger(redMarker);
-  var roadNameIndex;
-
-  for (var i = 0; i < dangerIndexArray.length; i++) {
-    var detourArray = calculateDetour(routeIndexArray, dangerIndexArray[i]);
-
-    if (detourArray === undefined) {
-      continue;
-    }
-    else if (detourArray.length === 0) {
-      continue;
-    }
-    else {
-      roadNameIndex = i;
-      console.log(dangerIndexArray[i]);
-      break;
-    }
-  }
-  console.log(detourArray);
-  console.log(roadName[roadNameIndex]);
-
-  document.getElementById('danger_area_road').textContent = roadName[roadNameIndex];
-
-  finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray);
-
-  squaremap.destroy();
 }
 
 function calculateDetour(routeIndexArray, dangerIndexArray) {

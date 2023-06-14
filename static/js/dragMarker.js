@@ -170,7 +170,6 @@ function hideMarkers() {
 }
 setMarkers(null);
 
-
 function redirectToTMap() {
   // 변수 X와 Y의 값을 동적으로 설정
   var slat;

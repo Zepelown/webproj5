@@ -8,42 +8,87 @@ const $startFindWay = document.querySelector(".start_find_way");
 const $markerDelete = document.querySelector(".marker_delete");
 const $removeMakerBtn = document.querySelector("#removeMarkerBtn");
 const $pagination = document.querySelector("#pagination");
-const $navButtonBox = document.querySelector('.nav_button_box');
-const $navButtonDangerBox = document.querySelector('.nav_button_danger_area');
-const $navButtonFacilities = document.querySelector('.nav_button_facilities');
-const $navBUttonOldman = document.querySelector('.nav_button_oldman');
+const $navButtonBox = document.querySelector(".nav_button_box");
+const $navButtonDangerBox = document.querySelector(".nav_button_danger_area");
+const $navButtonFacilities = document.querySelector(".nav_button_facilities");
+const $navBUttonOldman = document.querySelector(".nav_button_oldman");
+const $sideMenuBox = document.querySelector(".side_menu_box");
+const $searchAnchamMenuButton = document.querySelector(
+  ".search_ancham_menu_button"
+);
+const $sideMenuExitButton = document.querySelector(".side_menu_exit_button");
+const $sideMenuLogin = document.querySelector(".side_menu_login");
+const $loginBigBox = document.querySelector(".login_bigbox");
+const $loginExit = document.querySelector(".login_exit");
+const $goJoinButton = document.querySelector(".gojoin_button");
+const $userJoinbox = document.querySelector(".user_join_box");
+const $joinExitButton = document.querySelector(".join_exit");
 
-$navButtonDangerBox.addEventListener('mouseover', () => {
-  $navButtonDangerBox.style.backgroundColor = 'rgba(0,0,0,0.4)';
-  $navButtonDangerBox.style.color = 'white';
-})
+$joinExitButton.addEventListener("click", () => {
+  $userJoinbox.style.transform = "translate(-3000px)";
+});
 
-$navButtonDangerBox.addEventListener('mouseout', () => {
-  $navButtonDangerBox.style.backgroundColor = 'white';
-  $navButtonDangerBox.style.color = 'black';
-})
+$goJoinButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  $loginBigBox.style.display = "none";
+  $userJoinbox.style.transform = "translateX(0)";
+});
 
-$navButtonFacilities.addEventListener('mouseover', () => {
-  $navButtonFacilities.style.backgroundColor = 'rgba(0,0,0,0.4)';
-  $navButtonFacilities.style.color = 'white';
-})
+$loginExit.addEventListener("click", () => {
+  $loginBigBox.style.display = "none";
+});
 
-$navButtonFacilities.addEventListener('mouseout', () => {
-  $navButtonFacilities.style.backgroundColor = 'white';
-  $navButtonFacilities.style.color = 'black';
+$sideMenuLogin.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(-300px)";
 
-})
+  $loginBigBox.style.display = "flex";
+});
 
-$navBUttonOldman.addEventListener('mouseover', () => {
-  $navBUttonOldman.style.backgroundColor = 'rgba(0,0,0,0.4)';
-  $navBUttonOldman.style.color = 'white';
-})
+$sideMenuLogin.addEventListener("mouseover", () => {
+  $sideMenuLogin.style.backgroundColor = "rgba(0,0,0,0.8)";
+});
 
-$navBUttonOldman.addEventListener('mouseout', () => {
-  $navBUttonOldman.style.backgroundColor = 'white';
-  $navBUttonOldman.style.color = 'black';
+$sideMenuLogin.addEventListener("mouseout", () => {
+  $sideMenuLogin.style.backgroundColor = "rgba(0,0,0,0.3)";
+});
 
-})
+$sideMenuExitButton.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(-300px)";
+});
+
+$searchAnchamMenuButton.addEventListener("click", () => {
+  $sideMenuBox.style.transform = "translateX(0)";
+});
+
+$navButtonDangerBox.addEventListener("mouseover", () => {
+  $navButtonDangerBox.style.backgroundColor = "rgba(0,0,0,0.4)";
+  $navButtonDangerBox.style.color = "white";
+});
+
+$navButtonDangerBox.addEventListener("mouseout", () => {
+  $navButtonDangerBox.style.backgroundColor = "white";
+  $navButtonDangerBox.style.color = "black";
+});
+
+$navButtonFacilities.addEventListener("mouseover", () => {
+  $navButtonFacilities.style.backgroundColor = "rgba(0,0,0,0.4)";
+  $navButtonFacilities.style.color = "white";
+});
+
+$navButtonFacilities.addEventListener("mouseout", () => {
+  $navButtonFacilities.style.backgroundColor = "white";
+  $navButtonFacilities.style.color = "black";
+});
+
+$navBUttonOldman.addEventListener("mouseover", () => {
+  $navBUttonOldman.style.backgroundColor = "rgba(0,0,0,0.4)";
+  $navBUttonOldman.style.color = "white";
+});
+
+$navBUttonOldman.addEventListener("mouseout", () => {
+  $navBUttonOldman.style.backgroundColor = "white";
+  $navBUttonOldman.style.color = "black";
+});
 $findWay.addEventListener("click", () => {
   $findWay.style.display = "none";
   $startFindWay.style.display = "block";
@@ -76,4 +121,3 @@ $removeMakerBtn.addEventListener("click", () => {
   $pagination.style.display = "none";
   $removeMakerBtn.style.display = "none";
 });
-

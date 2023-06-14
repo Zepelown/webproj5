@@ -17,18 +17,13 @@ const scarps = [];
 const temp = [];
 // const temp = new scarp("test", 1, 2);
 // scarps.push(temp);
-
 var mapContainer = document.getElementById("map"), // 지도를 표시할 div
   mapOption = {
-    center: new kakao.maps.LatLng(35.13417, 129.11397), // 지도의 중심좌표
-    level: 9, // 지도의 확대 레벨
+    center: new kakao.maps.LatLng(35.136121, 129.101008),
+    level: 4, // 지도의 확대 레벨
   };
 
-// 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places();
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
@@ -51,6 +46,12 @@ function mouseOutListener(infoWindow) {
     infoWindow.close();
   };
 }
+
+var clusterer = new kakao.maps.MarkerClusterer({
+  map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+  averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+  minLevel: 10, // 클러스터 할 최소 지도 레벨
+});
 
 // getApiScarpGanseoData();
 // getApiScarpGeumjeongData();
@@ -236,9 +237,9 @@ function makeMarker(name, lat, log) {
     "mouseout",
     mouseOutListener(infoWindow)
   );
-}
 
-async function test() {}
+  clusterer.addMarker();
+}
 
 const loadData = function () {
   return new Promise(function (resolve, reject) {
@@ -274,21 +275,5 @@ const loadMarkers = function () {
 
 async function startMap() {
   loadData().then(loadMarkers);
-
-  //   await loadMarkers();
-  //   scarps.forEach(async (item, index, array) => {
-  //     await delay().then(() => {
-  //       console.log(arr[index].lat);
-  //     });
-  //   });
-
-  // async function startMap() {
-  //   let promise = new Promise((resolve, rejected) => {
-  //     resolve(loadData());
-  //   });
-  //   let result = await promise;
-
-  //   return result;
-  // }
 }
 startMap();

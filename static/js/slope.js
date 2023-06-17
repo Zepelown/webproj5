@@ -26,7 +26,7 @@ var redClusterer = new kakao.maps.MarkerClusterer({
       // calculator 각 사이 값 마다 적용될 스타일을 지정한다
       width: "30px",
       height: "30px",
-      background: "rgba(255, 255, 0, .8)",
+      background: "rgba(245, 139, 0, .8)",
       borderRadius: "15px",
       color: "#000",
       textAlign: "center",
@@ -36,7 +36,7 @@ var redClusterer = new kakao.maps.MarkerClusterer({
     {
       width: "35px",
       height: "35px",
-      background: "rgba(255, 104, 13, .8)",
+      background: "rgba(245, 80, 13, .8)",
       borderRadius: "20px",
       color: "#000",
       textAlign: "center",
@@ -69,7 +69,7 @@ var elderyClusterer = new kakao.maps.MarkerClusterer({
       // calculator 각 사이 값 마다 적용될 스타일을 지정한다
       width: "30px",
       height: "30px",
-      background: "rgba(170, 255, 0, .8)",
+      background: "rgba(135, 245, 0, .8)",
       borderRadius: "15px",
       color: "#000",
       textAlign: "center",
@@ -79,7 +79,7 @@ var elderyClusterer = new kakao.maps.MarkerClusterer({
     {
       width: "35px",
       height: "35px",
-      background: "rgba(0, 250, 170, .8)",
+      background: "rgba(0, 200, 0, .8)",
       borderRadius: "20px",
       color: "#000",
       textAlign: "center",
@@ -89,7 +89,7 @@ var elderyClusterer = new kakao.maps.MarkerClusterer({
     {
       width: "40px",
       height: "40px",
-      background: "rgba(0, 255, 0, .8)",
+      background: "rgba(0, 110, 0, .8)",
       borderRadius: "25px",
       color: "#000",
       textAlign: "center",
@@ -112,7 +112,7 @@ var disableClusterer = new kakao.maps.MarkerClusterer({
       // calculator 각 사이 값 마다 적용될 스타일을 지정한다
       width: "30px",
       height: "30px",
-      background: "rgba(170, 255, 0, .8)",
+      background: "rgba(135, 245, 0, .8)",
       borderRadius: "15px",
       color: "#000",
       textAlign: "center",
@@ -122,7 +122,7 @@ var disableClusterer = new kakao.maps.MarkerClusterer({
     {
       width: "35px",
       height: "35px",
-      background: "rgba(0, 250, 170, .8)",
+      background: "rgba(0, 200, 0, .8)",
       borderRadius: "20px",
       color: "#000",
       textAlign: "center",
@@ -132,7 +132,7 @@ var disableClusterer = new kakao.maps.MarkerClusterer({
     {
       width: "40px",
       height: "40px",
-      background: "rgba(0, 255, 0, .8)",
+      background: "rgba(0, 110, 0, .8)",
       borderRadius: "25px",
       color: "#000",
       textAlign: "center",

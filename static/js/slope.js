@@ -507,7 +507,7 @@ function disabledComfort() {
               position: coords,
               image: markerImage_green, // 초록색 마커로 표시
             });
-            //console.log(marker);
+            console.log(marker);
 
             disableMarkers.push(marker);
 
@@ -630,5 +630,3 @@ function disableMarkerClick() {
     disableShowHide = 0;
   }
 }
-
-

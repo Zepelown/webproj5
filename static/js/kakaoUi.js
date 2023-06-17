@@ -23,6 +23,23 @@ const $loginExit = document.querySelector(".login_exit");
 const $goJoinButton = document.querySelector(".gojoin_button");
 const $userJoinbox = document.querySelector(".user_join_box");
 const $joinExitButton = document.querySelector(".join_exit");
+const $userMarker = document.querySelector(".user_marker");
+const $userMarkerBox = document.querySelector(".user_marker_box");
+const $markerButtonRegistration = document.querySelector(
+  ".marker_button_registration"
+);
+const $markerButtonCancellation = document.querySelector(
+  ".marker_button_cancellation"
+);
+
+$markerButtonCancellation.addEventListener("click", (e) => {
+  e.preventDefault();
+  $userMarkerBox.style.transform = "translateY(-900px)";
+});
+
+$userMarker.addEventListener("click", () => {
+  $userMarkerBox.style.transform = "translateY(0)";
+});
 
 $joinExitButton.addEventListener("click", () => {
   $userJoinbox.style.transform = "translate(-3000px)";

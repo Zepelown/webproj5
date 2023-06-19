@@ -648,7 +648,12 @@ function getAllUserMarker() {
           var infowindow = new kakao.maps.InfoWindow({
             content:
               '<div style="width:150px;text-align:center;padding:6px 0;">' +
+              "<h2>" +
               data[index].placename +
+              "</h2>" +
+              "<p>" +
+              data[index].desc +
+              "</p>" +
               "</div>",
           });
 

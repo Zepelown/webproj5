@@ -14,18 +14,39 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 $userMarker.addEventListener("click", () => {
   confirm = true;
   console.log(confirm);
-
   marker = new kakao.maps.Marker({
     position: map.getCenter(),
   });
   marker.setMap(map);
 });
 
-// const $registerReview = document.querySelector(
-//   ".user_marker_button_marker_button_registration"
-// );
+window.onload = () => {
+  const form = document.getElementById("register_review_form");
+  form.addEventListener("submit", (e) => {
+    const formData = new FormData(form);
+    const jsonData = {};
+    for (const [key, value] of formData.entries()) {
+      jsonData[key] = value;
+    }
+    const url = "/api/addUserMarker";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(jsonData),
+    };
 
-// $registerReview.addEventListener("click", () => {});
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response:", data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+};
 
 kakao.maps.event.addListener(map, "click", function (mouseEvent) {
   if (confirm) {

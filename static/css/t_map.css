@@ -48,3 +48,7 @@ body {
     width: 200px;
   }
 }
+
+#danger_area_road {
+  color: black;
+}

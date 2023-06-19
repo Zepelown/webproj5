@@ -14,7 +14,7 @@ const UserMarker = require("../models/userMarker");
 const addUserMarker = async (req, res, next) => {
   try {
     const data = req.body;
-    // const id = data.placename;
+    const id = data.placename;
     console.log(data);
     const result = await firestore
       .collection("reviews")

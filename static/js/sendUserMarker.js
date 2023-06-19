@@ -48,11 +48,16 @@ window.onload = () => {
   });
 };
 
+const $lat_input = document.querySelector(".lat_input");
+const $lng_input = document.querySelector(".lng_input");
+
 kakao.maps.event.addListener(map, "click", function (mouseEvent) {
   if (confirm) {
     var latlng = mouseEvent.latLng;
     lat = latlng.getLat();
     lng = latlng.getLng();
+    $lat_input.value = lat;
+    $lng_input.value = lng;
     marker.setPosition(latlng);
   }
 });

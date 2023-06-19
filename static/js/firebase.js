@@ -1,10 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import {
-  getAuth, // authentication ����
-  signInWithPopup, //google �α����� �˾�â�� ���� ����
-  GoogleAuthProvider, //google login ���
-  signInWithEmailAndPassword, // email �α���
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";

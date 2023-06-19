@@ -422,6 +422,92 @@ function YeongdoSlope() {
     });
 }
 
+
+
+function construction() {
+
+  var url = 'http://apis.data.go.kr/6260000/BusanCnstrWorkInfoService/getCnstrWorkInfo';
+  var params = {
+    serviceKey: 'muAzQmFBf9gOEiqBbNkzMbOmlHV9zPkNCrLf6FsdrOzZsUnb+Pm84EInw0N1bZmrpTEGEdkXbmRRBi0cRq+hRA==',
+    pageNo: '1',
+    numOfRows: '10',
+    resultType: 'json'
+  };
+
+  var cnstrcNms = ['학교 분류식하수관로 연결공사(서부지원청 일원)',
+    '학교 분류식하수관로 연결사업(북부, 동래지원청 일원)',
+    '학교 분류식하수관로 연결사업(남부, 해운대지원청 일원)',
+    '하수관로 신설공사[남부처리구역(광안, 남천동 일원)]',
+    '하수관로 신설(확충)공사 (대저처리분구 일원)',
+    '만덕~센텀 도시고속화도로 건설',
+    '하수관로 신설(확장)공사[수영처리구역(양정동 제척지 일원)]',
+    '하수관로 신설(확충)공사 (북구제척지 일원)',
+    '하수관로 신설(확충)공사 (사상구제척지 일원)',
+    '정관산업단지 연결도로 [예림교차로~농공단지] 확장',
+    '하수관로 신설(확충)공사 (신평동 일원)',
+    '분뇨처리시설 현대화사업',
+    '노후하수관로정비사업3-1단계(신시가처리분구 일원)',
+    '사상역 광역환승센터 건설공사',
+    '동김해IC~식만JCT간 광역도로 건설',
+    '부산복합혁신센터 건립공사',
+    '수영처리구역(수영강) 오수관로 정비사업',
+    '수영처리구역(온천천) 오수관로 정비사업 4차',
+    '동부산하수처리구역 오수관로 설치공사',
+    '양정동 일원 하수관로 신설(확충)'];
+
+
+  var tooltips = [];  // 툴팁을 담을 배열
+
+  for (var i = 0; i < cnstrcNms.length; i++) {
+    params.cnstrcNm = cnstrcNms[i];
+
+    fetch(url + '?' + new URLSearchParams(params))
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        var items = data.getCnstrWorkInfo.body.items.item;
+
+        for (var j = 0; j < items.length; j++) {
+          var item = items[j];
+          var markerX = parseFloat(item.markerX);
+          var markerY = parseFloat(item.markerY);
+          var cnstrcNm = item.cnstrcNm;
+          var enddate = item.endde;
+
+          if (!isNaN(markerX) && !isNaN(markerY)) {
+            var marker = new kakao.maps.Marker({
+              position: new kakao.maps.LatLng(markerX, markerY),
+              map: map,
+              image: markerImage_red // 빨간색 마커로 표시
+            });
+            redMarkers.push(marker);
+
+            var tooltipContent = "<div class='tooltip-content'>" +
+              "<strong>공사명: </strong>" + cnstrcNm +
+              "<br><strong>끝나는 날: </strong>" + enddate +
+              "</div>";  // 툴팁에 표시될 내용
+            var tooltip = new kakao.maps.InfoWindow({
+              content: tooltipContent,
+              removable: true
+            });
+
+            tooltips.push(tooltip);  // 툴팁을 배열에 추가
+
+            kakao.maps.event.addListener(marker, 'mouseover', function () {
+              tooltip.open(map, this);
+            });
+            kakao.maps.event.addListener(marker, 'mouseout', function () {
+              tooltip.close();
+            });
+          }
+        }
+      });
+  }
+}
+
+
+
 function elderlyCare() {
   const url =
     "https://api.odcloud.kr/api/15065819/v1/uddi:0d24a5ef-65e3-4fdd-8c7b-c2d008a217e6?page=1&perPage=300&returnType=JSON&serviceKey=muAzQmFBf9gOEiqBbNkzMbOmlHV9zPkNCrLf6FsdrOzZsUnb%2BPm84EInw0N1bZmrpTEGEdkXbmRRBi0cRq%2BhRA%3D%3D";
@@ -533,11 +619,15 @@ function disabledComfort() {
     });
 }
 
+
+
+
 GangseoSlope();
 GeumjeongSlope();
 SasangSlope();
 YeonjeSlope();
 YeongdoSlope();
+construction();
 elderlyCare();
 disabledComfort();
 

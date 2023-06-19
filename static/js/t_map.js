@@ -168,7 +168,6 @@ var redMarker = [
   //[35.2766225599279, 129.072188208121]
 ];
 
-
 // URL 매개변수 추출
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -206,17 +205,16 @@ function initTmap() {
   for (var i = 0; i < dangerIndexArray.length; i++) {
     var detourArray = calculateDetour(routeIndexArray, dangerIndexArray[i]);
 
-    if (detourArray === undefined)
-      continue;
-    else if (detourArray.length === 0)
-      continue;
+    if (detourArray === undefined) continue;
+    else if (detourArray.length === 0) continue;
     else {
       roadNameIndex = i;
       break;
     }
   }
 
-  document.getElementById('danger_area_road').textContent = roadName[roadNameIndex];
+  document.getElementById("danger_area_road").textContent =
+    roadName[roadNameIndex];
 
   // 6. 우회한 최종 경로 그리기
   finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray);
@@ -255,7 +253,6 @@ function mapAndMarker(start_lat, start_lng, end_lat, end_lng) {
 }
 
 function calculateDetour(routeIndexArray, dangerIndexArray) {
-
   if (dangerIndexArray[0] === undefined) {
     return;
   }
@@ -1215,13 +1212,13 @@ function findDanger(redMarker) {
       error: function (request, status, error) {
         console.log(
           "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
+            request.status +
+            "\n" +
+            "message:" +
+            request.responseText +
+            "\n" +
+            "error:" +
+            error
         );
       },
     });
@@ -1257,10 +1254,14 @@ function findRoute(start_lat, start_lng, end_lat, end_lng) {
       var resultData = response.features;
 
       //결과 출력
-      var tDistance = "총 거리 : " +
-        (resultData[0].properties.totalDistance / 1000).toFixed(1) + "km,";
-      var tTime = " 총 시간 : " +
-        (resultData[0].properties.totalTime / 60).toFixed(0) + "분";
+      var tDistance =
+        "총 거리 : " +
+        (resultData[0].properties.totalDistance / 1000).toFixed(1) +
+        "km,";
+      var tTime =
+        " 총 시간 : " +
+        (resultData[0].properties.totalTime / 60).toFixed(0) +
+        "분";
       $("#result").text(tDistance + tTime);
 
       //기존 그려진 라인 & 마커가 있다면 초기화
@@ -1338,13 +1339,13 @@ function findRoute(start_lat, start_lng, end_lat, end_lng) {
     error: function (request, status, error) {
       console.log(
         "code:" +
-        request.status +
-        "\n" +
-        "message:" +
-        request.responseText +
-        "\n" +
-        "error:" +
-        error
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
       );
     },
   });
@@ -1480,13 +1481,13 @@ function finalFindRoute(start_lat, start_lng, end_lat, end_lng, detourArray) {
     error: function (request, status, error) {
       console.log(
         "code:" +
-        request.status +
-        "\n" +
-        "message:" +
-        request.responseText +
-        "\n" +
-        "error:" +
-        error
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
       );
     },
   });
@@ -1533,9 +1534,10 @@ function drawLine(arrPoint) {
 }
 
 function addSquareMap() {
-
-  var startX = (Number(startLatitude) + Number(arriveLatitude)) / 2 - (0.000904 * 10);
-  var startY = (Number(startLongitude) + Number(arriveLongitude)) / 2 - (0.001078 * 10);
+  var startX =
+    (Number(startLatitude) + Number(arriveLatitude)) / 2 - 0.000904 * 10;
+  var startY =
+    (Number(startLongitude) + Number(arriveLongitude)) / 2 - 0.001078 * 10;
 
   squareArray = [];
   for (var i = 0; i < 20; i++) {
@@ -1556,11 +1558,10 @@ function addSquareMap() {
     fillOpacity: 0,
     size: 100,
     values: [1, 2, 3, 4, 5, 6],
-    colors: ['#f8fcca', '#ecf8b2', '#91d4b9', '#1e90bf', '#24489d', '#1e2f89'],
+    colors: ["#f8fcca", "#ecf8b2", "#91d4b9", "#1e90bf", "#24489d", "#1e2f89"],
     data: {
       data: squareArray,
-      max: 10
-    }
+      max: 10,
+    },
   });
 }
-

@@ -13,6 +13,14 @@ var markerImage_red = new kakao.maps.MarkerImage(
   }
 );
 
+var markerImage_green = new kakao.maps.MarkerImage(
+  "https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png",
+  new kakao.maps.Size(14, 20),
+  {
+    offset: new kakao.maps.Point(13, 34),
+  }
+);
+
 var redMarkers = []; // 경사로 구역 저장 배열
 
 var redClusterer = new kakao.maps.MarkerClusterer({
@@ -433,13 +441,6 @@ function elderlyCare() {
       // 노인돌봄 센터 좌표 리스트
       var centers = resJson.data;
       // 초록색 마커로 표시
-      var markerImage_green = new kakao.maps.MarkerImage(
-        "https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png",
-        new kakao.maps.Size(14, 20),
-        {
-          offset: new kakao.maps.Point(13, 34),
-        }
-      );
       for (var i = 0; i < centers.length; i++) {
         var lat = centers[i]["위도"];
         var lng = centers[i]["경도"];
@@ -490,14 +491,6 @@ function disabledComfort() {
 
         var geocoder = new kakao.maps.services.Geocoder();
 
-        var markerImage_green = new kakao.maps.MarkerImage(
-          "https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png",
-          new kakao.maps.Size(14, 20),
-          {
-            offset: new kakao.maps.Point(13, 34),
-          }
-        );
-
         geocoder.addressSearch(address, function (result, status) {
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -533,6 +526,50 @@ function disabledComfort() {
     });
 }
 
+function getAllUserMarker() {
+  fetch("http://localhost:8080/api/getAllUserMarker")
+    .then((res) => res.json())
+    .then((resJson) => {
+      const data = resJson;
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        var coords = new kakao.maps.LatLng(data[i].lat, data[i].lng);
+        var marker;
+        if (data[i].danger == "true") {
+          marker = new kakao.maps.Marker({
+            map: map,
+            position: coords,
+            image: markerImage_red, // 빨간색 마커로 표시
+          });
+          redMarkers.push(marker);
+        } else {
+          marker = new kakao.maps.Marker({
+            map: map,
+            position: coords,
+            image: markerImage_green, // 초록색 마커로 표시
+          });
+          disableMarkers.push(marker);
+        }
+        var infowindow = new kakao.maps.InfoWindow({
+          content:
+            '<div style="width:150px;text-align:center;padding:6px 0;">' +
+            data[i].placename +
+            "</div>",
+        });
+
+        // Add 'mouseover' event listener to the marker
+        kakao.maps.event.addListener(marker, "mouseover", function () {
+          infowindow.open(map, marker);
+        });
+
+        // Add 'mouseout' event listener to the marker
+        kakao.maps.event.addListener(marker, "mouseout", function () {
+          infowindow.close();
+        });
+      }
+    });
+}
+
 GangseoSlope();
 GeumjeongSlope();
 SasangSlope();
@@ -540,6 +577,7 @@ YeonjeSlope();
 YeongdoSlope();
 elderlyCare();
 disabledComfort();
+getAllUserMarker();
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 function setRedMarkers(map) {

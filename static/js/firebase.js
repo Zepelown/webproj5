@@ -5,7 +5,8 @@ import {
   signInWithPopup, //google �α����� �˾�â�� ���� ����
   GoogleAuthProvider, //google login ���
   signInWithEmailAndPassword, // email �α���
-  createUserWithEmailAndPassword, //email ȸ������
+  createUserWithEmailAndPassword,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
 
@@ -16,11 +17,30 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const $gmail = document.querySelector(".GoogleBtn");
+const $logIn = document.querySelector(".GoogleLogIn");
+const $logOut = document.querySelector(".GoogleLogOut");
 
-$gmail.addEventListener("click", () => {
+$logIn.addEventListener("click", () => {
   console.log("test?");
-  signInWithPopup(auth, provider).then((result) => {
-    console.log("로그인 완료!!");
-  });
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("로그인 완료!!");
+      var user = result.user;
+      console.log(user);
+      localStorage.setItem("nickName", user.displayName);
+    })
+    .catch((err) => {
+      console.log("로그인 실패!");
+    });
+});
+
+$logOut.addEventListener("click", () => {
+  signOut(getAuth(app))
+    .then(() => {
+      console.log("로그아웃 완료!");
+      location.reload();
+    })
+    .catch((err) => {
+      console.log("로그아웃 실패!");
+    });
 });

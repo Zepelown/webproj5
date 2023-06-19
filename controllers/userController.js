@@ -1,8 +1,55 @@
-"use strict";
-
 const firebase = require("../firebaseAdmin");
 const User = require("../models/user");
 const firestore = firebase.db.firestore();
+const UserMarker = require("../models/userMarker");
+
+// const newPlace = {
+//   danger: true,
+//   desc: "test",
+//   lat: "35.136121",
+//   lng: "129.101008",
+//   placename: "test",
+// };
+
+const addUserMarker = async (req, res, next) => {
+  try {
+    const data = req.body;
+    // const id = data.placename;
+    console.log(data);
+    const result = await firestore
+      .collection("reviews")
+      .doc(data.placename)
+      .set(data);
+    res.send("Record saved successfully");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const getAllUserMarker = async (req, res, next) => {
+  try {
+    const snapshot = await firestore.collection("reviews").get();
+    const data = snapshot;
+    const userMarkerArray = [];
+    if (data.empty) {
+      res.status(404).send("No User Record found");
+    } else {
+      snapshot.forEach((doc) => {
+        const user_marker_data = new UserMarker(
+          doc.data().placename,
+          doc.data().desc,
+          doc.data().danger,
+          doc.data().lat,
+          doc.data().lng
+        );
+        userMarkerArray.push(user_marker_data);
+      });
+      res.send(userMarkerArray);
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
 const addUser = async (req, res, next) => {
   try {
@@ -95,7 +142,10 @@ const login = async (req, res, next) => {
   firebase.app
     .auth()
     .signInWithEmailAndPassword(req.body.email, req.body.password)
-    .then((firebaseUser) => {
+    .then((result) => {
+      const credential = result.credential;
+      var token = credential.accessToken;
+      var user = result.user;
       console.log("로그인 완료!");
     })
     .catch((err) => {
@@ -109,4 +159,6 @@ module.exports = {
   updateUser,
   login,
   signIn,
+  addUserMarker,
+  getAllUserMarker,
 };

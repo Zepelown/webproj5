@@ -26,26 +26,41 @@
         ></i>
         safety champion
       </div>
-      <form action="">
+      <form action="/api/addUserMarker" method="post">
         <div style="margin-top: 10px">
+          <input
+            type="number"
+            placeholder="lat"
+            class="user_marker_input marker_name"
+            name="lat"
+            step="any"
+          />
+          <input
+            type="number"
+            placeholder="lng"
+            class="user_marker_input marker_name"
+            name="lng"
+            step="any"
+          />
           <div>장소 이름</div>
           <input
             type="text"
             placeholder="이름"
             class="user_marker_input marker_name"
+            name="placename"
           />
         </div>
         <div style="margin-top: 10px">
           <div>종류</div>
-          <input type="radio" name="drone" value="위험 지역" />
+          <input type="radio" name="danger" value="true" />
           <label for="huey">위험 지역</label>
-          <input type="radio" name="drone" value="편의 시설" />
+          <input type="radio" name="danger" value="false" />
           <label for="huey">편의 시설</label>
         </div>
         <div style="margin-top: 10px">
           <div>설명</div>
           <textarea
-            name=""
+            name="desc"
             id=""
             cols="30"
             rows="5"
@@ -110,7 +125,8 @@
             로그인
           </button>
           <button class="login_button gojoin_button">회원가입</button>
-          <input class="GoogleBtn" type="button" value="Google Login" />
+          <input class="GoogleLogIn" type="button" value="Google Login" />
+          <input class="GoogleLogOut" type="button" value="Google Lout" />
         </form>
       </div>
     </div>
@@ -234,7 +250,7 @@
     <script src="js/kakaoUi.js"></script>
     <script src="js/dragMarker.js"></script>
     <script src="js/slope.js"></script>
-    <script src="js/userMarker.js"></script>
-    <script src="js/firebase.js" type="module"></script>
+    <script src="js/sendUserMarker.js"></script>
+    <script type="module" src="js/firebase.js"></script>
   </body>
 </html>

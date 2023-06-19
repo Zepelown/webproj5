@@ -13,6 +13,14 @@ var markerImage_red = new kakao.maps.MarkerImage(
   }
 );
 
+var markerImage_green = new kakao.maps.MarkerImage(
+  "https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png",
+  new kakao.maps.Size(14, 20),
+  {
+    offset: new kakao.maps.Point(13, 34),
+  }
+);
+
 var redMarkers = []; // 경사로 구역 저장 배열
 
 var redClusterer = new kakao.maps.MarkerClusterer({
@@ -577,14 +585,6 @@ function disabledComfort() {
 
         var geocoder = new kakao.maps.services.Geocoder();
 
-        var markerImage_green = new kakao.maps.MarkerImage(
-          "https://cdn.pixabay.com/photo/2013/07/13/11/57/landmark-159035_1280.png",
-          new kakao.maps.Size(14, 20),
-          {
-            offset: new kakao.maps.Point(13, 34),
-          }
-        );
-
         geocoder.addressSearch(address, function (result, status) {
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -643,7 +643,7 @@ function getAllUserMarker() {
               position: coords,
               image: markerImage_green, // 초록색 마커로 표시
             });
-            disableMarkers.push(marker);
+            elderyMarkers.push(marker);
           }
           var infowindow = new kakao.maps.InfoWindow({
             content:

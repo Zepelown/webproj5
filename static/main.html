@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>안챔</title>
+  <link rel="stylesheet" href="css/search.css" />
+  <link rel="stylesheet" href="css/kakao.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=DynaPuff:wght@600&family=Fasthand&family=Noto+Sans+KR:wght@500&family=Open+Sans:wght@500&family=Ubuntu:ital@1&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script src="https://kit.fontawesome.com/fccc6f24f6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="user_marker_box">
+    <div class="user_marker_header">
+      <i class="fa-regular fa-hand-point-up fa-lg" style="margin-right: 10px"></i>
+      safety champion
+    </div>
+    <form id="register_review_form">
+      <div style="margin-top: 10px">
+        <input type="number" placeholder="lat" class="user_marker_input marker_name lat_input" name="lat" step="any" />
+        <input type="number" placeholder="lng" class="user_marker_input marker_name lng_input" name="lng" step="any" />
+        <div>장소 이름</div>
+        <input type="text" placeholder="이름" class="user_marker_input marker_name" name="placename" />
+      </div>
+      <div style="margin-top: 10px">
+        <div>종류</div>
+        <input type="radio" name="danger" value="true" />
+        <label for="huey">위험 지역</label>
+        <input type="radio" name="danger" value="false" />
+        <label for="huey">편의 시설</label>
+      </div>
+      <div style="margin-top: 10px">
+        <div>설명</div>
+        <textarea name="desc" id="" cols="30" rows="5" class="user_marker_input marker_description"></textarea>
+      </div>
+      <button type="submit" class="user_marker_button marker_button_registration">
+        등록
+      </button>
+      <button type="submit" class="user_marker_button marker_button_cancellation">
+        취소
+      </button>
+    </form>
+  </div>
+
+  <div class="user_join_box">
+    <div class="join_box">
+      <div class="join_exit">
+        <i class="fa-solid fa-xmark fa-lg"></i>
+      </div>
+
+      <div class="join_header">
+        <div>회원가입</div>
+      </div>
+
+      <form action="" class="join_form">
+        <input type="text" placeholder="userName" />
+        <input type="text" placeholder="id" />
+        <input type="password" placeholder="password" />
+        <button class="join_button">회원가입</button>
+      </form>
+    </div>
+  </div>
+  <div class="login_bigbox">
+    <div class="login_box">
+      <div class="login_exit">
+        <i class="fa-solid fa-xmark fa-lg"></i>
+      </div>
+
+      <div class="login_header">
+        <i class="fa-regular fa-hand-point-up fa-lg" style="margin-right: 10px"></i>
+        safety champion
+      </div>
+
+      <form action="" class="login_form">
+        <input type="text" placeholder="id" />
+        <input type="password" placeholder="password" style="margin-top: 10px" />
+        <button type="submit" class="login_button login_button">
+          로그인
+        </button>
+        <button class="login_button gojoin_button">회원가입</button>
+        <input class="GoogleLogIn" type="button" value="Google Login" />
+        <input class="GoogleLogOut" type="button" value="Google Lout" />
+      </form>
+    </div>
+  </div>
+  <div class="side_menu_box">
+    <div class="side_menu_headaer">
+      <div class="side_menu_ancham">
+        <div style="margin-right: 10px">
+          <i class="fa-regular fa-hand-point-up fa-lg"></i>
+        </div>
+        <div>안전 챔피언</div>
+      </div>
+      <div><i class="fa-solid fa-xmark fa-lg side_menu_exit_button"></i></div>
+    </div>
+    <div class="side_menu_login_box">
+      <div class="side_menu_login">로그인</div>
+    </div>
+  </div>
+
+  <div class="map_wrap">
+    <div id="map" style="width: 100%; height: 100vh; position: relative; overflow: hidden"></div>
+    <div id="top_service">
+      <div class="search_box">
+        <!-- <div class="search_button">
+                    검색하기
+                </div> -->
+        <div id="menu_wrap" class="bg_white">
+          <div class="option">
+            <div>
+              <form onsubmit="searchPlaces(); return false;" class="search_form">
+                <div class="search_ancham">
+                  <div>
+                    <i class="fa-solid fa-bars fa-lg search_ancham_menu_button" style="margin-right: 10px"></i>
+                  </div>
+                  <div>안챔</div>
+                </div>
+                <input type="text" value="" id="keyword" size="15" class="search_input" placeholder="장소,주소" />
+                <button type="submit" class="search_input_button">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+                <button id="removeMarkerBtn">
+                  <i class="fa-solid fa-xmark fa-lg"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+        </div>
+      </div>
+      <div class="nav_button_box">
+        <div onclick="redMarkerClick()" class="nav_button_danger_area">
+          <i class="fa-solid fa-hammer fa-lg"></i>
+          위험지역
+        </div>
+        <div onclick="disableMarkerClick()" class="nav_button_facilities">
+          <i class="fa-brands fa-pagelines fa-lg"></i>
+          편의시설
+        </div>
+        <div onclick="elderyMarkerClick()" class="nav_button_oldman">
+          <i class="fa-solid fa-person-cane fa-lg"></i>
+          노인
+        </div>
+      </div>
+    </div>
+
+    <div class="find_way_button_box">
+      <div>
+        <i class="fa-solid fa-arrow-turn-up fa-2x"></i>
+      </div>
+      <div class="find_way_button" style="margin-top: 10px">
+        <div onclick="showMarkers()" style="cursor: pointer" class="find_way">
+          길찾기
+        </div>
+        <div onclick="redirectToTMap()" style="cursor: pointer" class="start_find_way">
+          길찾기 시작
+        </div>
+      </div>
+    </div>
+
+    <div class="marker_delete">
+      <div>
+        <i class="fa-solid fa-xmark fa-2x"></i>
+      </div>
+      <div class="find_way_button" style="margin-top: 10px">
+        <div onclick="hideMarkers()" style="cursor: pointer">마커 삭제</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user_marker">
+    <div><i class="fa-solid fa-location-dot fa-lg"></i></div>
+    <div class="create_marker">마커 생성</div>
+  </div>
+
+  <script type="text/javascript"
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=48bf9c9621d5f297a462adb46cba2f1b&libraries=services,clusterer"></script>
+  <script src="js/search.js"></script>
+  <script src="js/kakaoUi.js"></script>
+  <script src="js/dragMarker.js"></script>
+  <script src="js/slope.js"></script>
+  <script src="js/sendUserMarker.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+</body>
+
+</html>
